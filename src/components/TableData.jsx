@@ -67,7 +67,7 @@ const TableData = ({ data, openModalAdd }) => {
           <SortSelect sort={sort} />
         </div>
         <div className="d-flex col-md-6 justify-content-end my-4">
-          <button type="button" className="btn btn-add d-flex align-items-center" onClick={() => openModalAdd(true)}>
+          <button type="button" className="btn btn-blue d-flex align-items-center" onClick={() => openModalAdd(true)}>
             <PlusCircle className="me-2" /><b>Add</b>
           </button>
         </div>

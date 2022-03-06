@@ -1,22 +1,10 @@
 import { useEffect, useState } from "react";
+import { COLUMNS, ORDER } from '../utils/variables';
 
 const SortSelect = ({ sort }) => {
 
   const [order, setOrder] = useState('asc');
   const [option, setOption] = useState('');
-
-  const ORDER = [
-    { label: "Naik", value: "asc" },
-    { label: "Turun", value: "desc" }
-  ]
-
-  const OPTIONS = [
-    { label: "Komoditas", value: "komoditas" },
-    { label: "Lokasi", value: "area_provinsi" },
-    { label: "Jumlah", value: "size" },
-    { label: "Harga", value: "price" },
-    { label: "Tanggal", value: "tgl_parsed" }
-  ]
 
   useEffect(() => {
     sort(option, order);
@@ -28,7 +16,7 @@ const SortSelect = ({ sort }) => {
       <div className="d-flex">
         <select className="form-select me-2" onChange={e => setOption(e.target.value)}>
           <option value="" selected disabled hidden>Pilih kolom</option>
-          {OPTIONS.map(option => {
+          {COLUMNS.map(option => {
             return (
               <option key={option.label} value={option.value}>{option.label}</option>
             )
