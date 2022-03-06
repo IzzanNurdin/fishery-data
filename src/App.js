@@ -1,8 +1,7 @@
-import dayjs from 'dayjs';
-import 'dayjs/locale/id'
 import './styles/App.scss';
 import SteinStore from 'stein-js-client';
 import React, { useEffect, useState } from 'react';
+import TableData from './components/TableData';
 
 function App() {
 
@@ -20,34 +19,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="container-md col-md-10 px-4">
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Komoditas</th>
-              <th scope="col">Provinsi</th>
-              <th scope="col">Kota</th>
-              <th scope="col">Jumlah</th>
-              <th scope="col">Harga</th>
-              <th scope="col">Tanggal</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(obj => {
-              return (
-                <tr key={`${obj.uuid}-${obj.timestamp}`}>
-                  <td>{obj.komoditas}</td>
-                  <td>{obj.area_provinsi}</td>
-                  <td>{obj.area_kota}</td>
-                  <td>{obj.size}</td>
-                  <td>{Number(obj.price).toLocaleString('id', {style: 'currency', currency: 'IDR'})}</td>
-                  <td>{obj.tgl_parsed ? dayjs(obj.tgl_parsed).locale('id').format('dddd, DD MMMM YYYY') : "-"}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+      <TableData data={data} />
     </div>
   );
 }
