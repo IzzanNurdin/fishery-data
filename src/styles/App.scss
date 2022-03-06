@@ -11,6 +11,14 @@
   table {
     color: white;
   }
+
+  .btn-add {
+    background-color: #5cd4ce;
+    color: white;
+    &:hover {
+      background-color: #32C1CD;
+    }
+  }
 }
 
 .App-logo {

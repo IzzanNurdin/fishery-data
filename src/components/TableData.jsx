@@ -8,8 +8,54 @@ const TableData = ({ data }) => {
 
   const [dataDisplay, setDataDisplay] = useState([]);
 
-  const sort = (sortBy) => {
-    setDataDisplay((prevData) => [...prevData.sort((a, b) => a[sortBy] > b[sortBy] ? 1 : b[sortBy] > a[sortBy] ? -1 : 0)])
+  const sort = (sortBy, order) => {
+    setDataDisplay((prevData) => [...prevData.sort((a, b) => {
+      switch (sortBy) {
+        case 'komoditas':
+        case 'area_provinsi':
+        case 'tgl_parsed':
+          if (a[sortBy] && b[sortBy] && a[sortBy].toLowerCase() >= b[sortBy].toLowerCase()) {
+            if (order === 'asc') {
+              return 1;
+            } else if (order === 'desc') {
+              return -1;
+            }
+          }
+          if (a[sortBy] && b[sortBy] && b[sortBy].toLowerCase() >= a[sortBy].toLowerCase()) {
+            if (order === 'asc') {
+              return -1;
+            } else if (order === 'desc') {
+              return 1;
+            }
+          }
+          break;
+        
+        case 'price':
+        case 'size':
+          if (a[sortBy] !== null && b[sortBy] !== null && Number(a[sortBy]) >= Number(b[sortBy])) {
+            if (order === 'asc') {
+              return 1;
+            } else if (order === 'desc') {
+              return -1;
+            }
+          }
+          if (a[sortBy] !== null && b[sortBy] !== null && Number(b[sortBy]) >= Number(a[sortBy])) {
+            if (order === 'asc') {
+              return -1;
+            } else if (order === 'desc') {
+              return 1;
+            }
+          }
+          break;
+        
+        default:
+          return 0;
+      }
+      
+      
+      return 0;
+      }
+      )])
   }
 
   useEffect(() => {
@@ -23,7 +69,7 @@ const TableData = ({ data }) => {
           <SortSelect sort={sort} />
         </div>
         <div className="d-flex col-md-6 justify-content-end my-4">
-          <button className="btn btn-primary d-flex align-items-center"><PlusCircle className="me-2" /><b>Add</b></button>
+          <button className="btn btn-add d-flex align-items-center"><PlusCircle className="me-2" /><b>Add</b></button>
         </div>
       </div>
       <table className="table">
