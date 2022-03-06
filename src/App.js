@@ -19,7 +19,13 @@ function App() {
 
   return (
     <div className="App">
-      <TableData data={data} />
+      {data.length > 0 ?
+        <TableData data={data} /> :
+        <div className="spinner-border" style={{ borderColor: "#68e5df"}} role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      
+      }
     </div>
   );
 }
