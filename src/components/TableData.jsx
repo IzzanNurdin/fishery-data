@@ -1,18 +1,12 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/id'
 import { useEffect, useState } from 'react';
+import SortSelect from './SortSelect';
+import { PlusCircle } from 'react-bootstrap-icons';
 
 const TableData = ({ data }) => {
 
   const [dataDisplay, setDataDisplay] = useState([]);
-
-  const OPTIONS = [
-    { label: "Komoditas", value: "komoditas" },
-    { label: "Lokasi", value: "area_provinsi" },
-    { label: "Jumlah", value: "size" },
-    { label: "Harga", value: "price" },
-    { label: "Tanggal", value: "tgl_parsed" }
-  ]
 
   const sort = (sortBy) => {
     setDataDisplay((prevData) => [...prevData.sort((a, b) => a[sortBy] > b[sortBy] ? 1 : b[sortBy] > a[sortBy] ? -1 : 0)])
@@ -24,16 +18,13 @@ const TableData = ({ data }) => {
 
   return (
     <div className="container-md col-md-10 px-4">
-      <div className="col-md-2 my-4">
-        <h6 className="me-2">Urutkan Dari</h6>
-        <select className="form-select" onChange={e => sort(e.target.value)}>
-          <option selected disabled hidden>Pilih kolom</option>
-          {OPTIONS.map(option => {
-            return (
-              <option value={option.value}>{option.label}</option>
-            )
-          })}
-        </select>
+      <div className="col-md-12 d-inline-flex">
+        <div className="col-md-6">
+          <SortSelect sort={sort} />
+        </div>
+        <div className="d-flex col-md-6 justify-content-end my-4">
+          <button className="btn btn-primary d-flex align-items-center"><PlusCircle className="me-2" /><b>Add</b></button>
+        </div>
       </div>
       <table className="table">
         <thead>
