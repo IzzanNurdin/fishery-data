@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import SortSelect from './SortSelect';
 import { PlusCircle } from 'react-bootstrap-icons';
 
-const TableData = ({ data }) => {
+const TableData = ({ data, openModalAdd }) => {
 
   const [dataDisplay, setDataDisplay] = useState([]);
 
@@ -51,9 +51,7 @@ const TableData = ({ data }) => {
         default:
           return 0;
       }
-      
-      
-      return 0;
+        return 0;
       }
       )])
   }
@@ -63,13 +61,15 @@ const TableData = ({ data }) => {
   }, [data])
 
   return (
-    <div className="container-md col-md-10 px-4">
+    <div className="col-md-12">
       <div className="col-md-12 d-inline-flex">
         <div className="col-md-6">
           <SortSelect sort={sort} />
         </div>
         <div className="d-flex col-md-6 justify-content-end my-4">
-          <button className="btn btn-add d-flex align-items-center"><PlusCircle className="me-2" /><b>Add</b></button>
+          <button type="button" className="btn btn-add d-flex align-items-center" onClick={() => openModalAdd(true)}>
+            <PlusCircle className="me-2" /><b>Add</b>
+          </button>
         </div>
       </div>
       <table className="table">
