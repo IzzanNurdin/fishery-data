@@ -63,6 +63,7 @@ function App() {
       setData(response);
       setLoadingList(false);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
