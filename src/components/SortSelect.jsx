@@ -8,6 +8,7 @@ const SortSelect = ({ sort }) => {
 
   useEffect(() => {
     sort(option, order);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [option, order])
 
   return (
