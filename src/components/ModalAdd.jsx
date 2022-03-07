@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
-const ModalAdd = ({ open, setOpenModal, onSave }) => {
+const ModalAdd = ({ open, setOpenModal, onSave, loading }) => {
 
   const [komoditas, setKomoditas] = useState('');
   const [area_kota, setKota] = useState('');
@@ -65,11 +65,19 @@ const ModalAdd = ({ open, setOpenModal, onSave }) => {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary" onClick={() => setOpenModal(false)}>Close</Button>
+        <Button variant="secondary" onClick={() => setOpenModal(false)}>Tutup</Button>
         <Button variant="primary"
           type="submit"
-          onClick={() => onSave(komoditas, area_kota, area_provinsi, size, price)}>
-          Save changes
+          disabled={loading}
+          onClick={() => onSave(komoditas, area_kota, area_provinsi, size, price)}
+        >
+          {loading ?
+            <div
+              className="spinner-border"
+              style={{ width: '1rem', height: '1rem' }}
+              role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div> : "Simpan"}
         </Button>
       </Modal.Footer>
     </Modal>

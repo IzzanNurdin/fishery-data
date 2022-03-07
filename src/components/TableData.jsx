@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import SortSelect from './SortSelect';
 import { PlusCircle } from 'react-bootstrap-icons';
 
-const TableData = ({ data, openModalAdd }) => {
+const TableData = ({ data, openModalAdd, loading }) => {
 
   const [dataDisplay, setDataDisplay] = useState([]);
 
@@ -29,7 +29,7 @@ const TableData = ({ data, openModalAdd }) => {
             }
           }
           break;
-        
+
         case 'price':
         case 'size':
           if (a[sortBy] !== null && b[sortBy] !== null && Number(a[sortBy]) >= Number(b[sortBy])) {
@@ -47,13 +47,13 @@ const TableData = ({ data, openModalAdd }) => {
             }
           }
           break;
-        
+
         default:
           return 0;
       }
-        return 0;
-      }
-      )])
+      return 0;
+    }
+    )])
   }
 
   useEffect(() => {
@@ -72,30 +72,40 @@ const TableData = ({ data, openModalAdd }) => {
           </button>
         </div>
       </div>
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Komoditas</th>
-            <th scope="col">Lokasi</th>
-            <th scope="col">Jumlah</th>
-            <th scope="col">Harga</th>
-            <th scope="col">Tanggal</th>
-          </tr>
-        </thead>
-        <tbody>
-          {dataDisplay.map((obj, idx) => {
-            return (
-              <tr key={`${obj.uuid} - ${idx}`}>
-                <td>{obj.komoditas ? obj.komoditas : "-"}</td>
-                <td>{`${obj.area_kota ? obj.area_kota : "-"}, ${obj.area_provinsi ? obj.area_provinsi : "-"}`}</td>
-                <td>{obj.size ? obj.size : "-"}</td>
-                <td>{obj.price ? Number(obj.price).toLocaleString('id', { style: 'currency', currency: 'IDR' }) : "-"}</td>
-                <td>{obj.tgl_parsed ? dayjs(obj.tgl_parsed).locale('id').format('dddd, DD MMMM YYYY') : "-"}</td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      {loading ?
+        <div className="col-md-12 d-flex justify-content-center">
+          <div
+            className="spinner-border mt-4"
+            style={{ borderColor: '#68e5df', borderRightColor: 'transparent' }}
+            role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>  :
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Komoditas</th>
+              <th scope="col">Lokasi</th>
+              <th scope="col">Jumlah</th>
+              <th scope="col">Harga</th>
+              <th scope="col">Tanggal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataDisplay.map((obj, idx) => {
+              return (
+                <tr key={`${obj.uuid} - ${idx}`}>
+                  <td>{obj.komoditas ? obj.komoditas : "-"}</td>
+                  <td>{`${obj.area_kota ? obj.area_kota : "-"}, ${obj.area_provinsi ? obj.area_provinsi : "-"}`}</td>
+                  <td>{obj.size ? obj.size : "-"}</td>
+                  <td>{obj.price ? Number(obj.price).toLocaleString('id', { style: 'currency', currency: 'IDR' }) : "-"}</td>
+                  <td>{obj.tgl_parsed ? dayjs(obj.tgl_parsed).locale('id').format('dddd, DD MMMM YYYY') : "-"}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      }
     </div>
   )
 }
