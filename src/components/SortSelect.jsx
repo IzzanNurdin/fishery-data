@@ -11,10 +11,10 @@ const SortSelect = ({ sort }) => {
   }, [option, order])
 
   return (
-    <div className="col-md-6 my-4">
+    <div className="col-md-6 col-sm-6 my-4">
       <h6 className="me-2"><b>Urutkan Dari</b></h6>
       <div className="d-flex">
-        <select className="form-select me-2" onChange={e => setOption(e.target.value)}>
+        <select className="form-select col-sm-3 me-2" onChange={e => setOption(e.target.value)}>
           <option value="" selected disabled hidden>Pilih kolom</option>
           {COLUMNS.map(option => {
             return (
@@ -22,7 +22,7 @@ const SortSelect = ({ sort }) => {
             )
           })}
         </select>
-        <select className="form-select" onChange={e => setOrder(e.target.value)}>
+        <select className="col-sm-3 form-select" onChange={e => setOrder(e.target.value)}>
           <option value="" selected disabled hidden>Pilih tingkatan</option>
           {ORDER.map(order => {
             return (

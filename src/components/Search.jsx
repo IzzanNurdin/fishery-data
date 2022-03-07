@@ -7,9 +7,9 @@ const Search = ({ onSearch }) => {
   const [searchValue, setSearchValue] = useState('');
 
   return (
-    <div className="col-md-12 pt-4">
+    <div className="col-md-12 col-sm-12 col-xs-12 pt-4">
       <div className="d-flex">
-        <div className="col-md-10">
+        <div style={{width: '80%'}}>
           <input
             className="form-control"
             value={searchValue}
@@ -17,11 +17,11 @@ const Search = ({ onSearch }) => {
             placeholder="Masukkan input disini untuk mencari"
           />
         </div>
-        <div className="col-md-2 ms-2">
-          <button className="btn btn-blue" onClick={() => onSearch(searchValue, searchBy)} style={{width: '100%'}}>Cari</button>
+        <div className="ms-2" style={{width: '20%'}}>
+          <button className="btn btn-blue" onClick={() => onSearch(searchValue, searchBy)} style={{width: '100%', letterSpacing: '1px'}}><b>Cari</b></button>
         </div>
       </div>
-      <div className="mt-2">
+      <div className="col-md-12 col-sm-12 mt-2">
         <label><b>Mencari berdasarkan</b></label>
       </div>
       <div className="col-md-12 mt-1 d-flex align-items-center">

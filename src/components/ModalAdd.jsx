@@ -12,7 +12,7 @@ const ModalAdd = ({ open, setOpenModal, onSave, loading }) => {
   return (
     <Modal show={open} onHide={() => setOpenModal(false)}>
       <Modal.Header closeButton>
-        <Modal.Title>Add data</Modal.Title>
+        <Modal.Title>Tambah data</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>

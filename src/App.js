@@ -78,7 +78,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="col-md-8 px-4">
+      <div className="col-lg-8 col-md-12 col-sm-12 col-xs-12 px-4">
         <Search onSearch={searchData} />
         <TableData data={data} openModalAdd={setOpenModalAdd} loading={loadingList} />
         <ModalAdd open={openModalAdd} setOpenModal={setOpenModalAdd} onSave={appendData} loading={loadingAdd} />

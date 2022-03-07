@@ -61,50 +61,58 @@ const TableData = ({ data, openModalAdd, loading }) => {
   }, [data])
 
   return (
-    <div className="col-md-12">
-      <div className="col-md-12 d-inline-flex">
-        <div className="col-md-6">
+    <div className="col-md-12 col-sm-12">
+      <div className="col-md-12 col-sm-12 d-md-inline-flex">
+        <div className="col-md-6 col-sm-12">
           <SortSelect sort={sort} />
         </div>
-        <div className="d-flex col-md-6 justify-content-end my-4">
+        <div className="d-flex col-md-6 col-sm-12 justify-content-end my-4">
           <button type="button" className="btn btn-blue d-flex align-items-center" onClick={() => openModalAdd(true)}>
-            <PlusCircle className="me-2" /><b>Add</b>
+            <PlusCircle className="me-2" /><b>Tambah</b>
           </button>
         </div>
       </div>
       {loading ?
-        <div className="col-md-12 d-flex justify-content-center">
+        <div className="col-md-12 col-sm-12 d-flex justify-content-center">
           <div
             className="spinner-border mt-4"
             style={{ borderColor: '#68e5df', borderRightColor: 'transparent' }}
             role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
-        </div>  :
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Komoditas</th>
-              <th scope="col">Lokasi</th>
-              <th scope="col">Jumlah</th>
-              <th scope="col">Harga</th>
-              <th scope="col">Tanggal</th>
-            </tr>
-          </thead>
-          <tbody>
-            {dataDisplay.map((obj, idx) => {
-              return (
-                <tr key={`${obj.uuid} - ${idx}`}>
-                  <td>{obj.komoditas ? obj.komoditas : "-"}</td>
-                  <td>{`${obj.area_kota ? obj.area_kota : "-"}, ${obj.area_provinsi ? obj.area_provinsi : "-"}`}</td>
-                  <td>{obj.size ? obj.size : "-"}</td>
-                  <td>{obj.price ? Number(obj.price).toLocaleString('id', { style: 'currency', currency: 'IDR' }) : "-"}</td>
-                  <td>{obj.tgl_parsed ? dayjs(obj.tgl_parsed).locale('id').format('dddd, DD MMMM YYYY') : "-"}</td>
+        </div> :
+        <div>
+          {dataDisplay.length > 0 ?
+            <table className="table">
+              <thead>
+                <tr>
+                  <th style={{maxWidth: '25%'}} scope="col">Komoditas</th>
+                  <th style={{maxWidth: '25%'}} scope="col">Lokasi</th>
+                  <th style={{maxWidth: '10%'}} scope="col">Jumlah</th>
+                  <th style={{maxWidth: '20%'}} scope="col">Harga</th>
+                  <th style={{maxWidth: '20%'}} scope="col">Tanggal</th>
                 </tr>
-              )
-            })}
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {dataDisplay.map((obj, idx) => {
+                  return (
+                    <tr key={`${obj.uuid} - ${idx}`}>
+                      <td>{obj.komoditas ? obj.komoditas : "-"}</td>
+                      <td>{`${obj.area_kota ? obj.area_kota : "-"}, ${obj.area_provinsi ? obj.area_provinsi : "-"}`}</td>
+                      <td>{obj.size ? obj.size : "-"}</td>
+                      <td>{obj.price ? Number(obj.price).toLocaleString('id', { style: 'currency', currency: 'IDR' }) : "-"}</td>
+                      <td>{obj.tgl_parsed ? dayjs(obj.tgl_parsed).locale('id').format('dddd, DD MMMM YYYY') : "-"}</td>
+                    </tr>
+                  )
+                })
+                }
+              </tbody>
+            </table> :
+            <div className='col-md-12 mt-4'>
+              <h3>Tidak ada data yang ditemukan</h3>
+            </div>
+          }
+        </div>
       }
     </div>
   )
