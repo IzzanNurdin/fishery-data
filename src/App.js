@@ -2,8 +2,6 @@ import './styles/App.scss';
 import SteinStore from 'stein-js-client';
 import React, { useEffect, useState } from 'react';
 import { ModalAdd, TableData, Search } from './components';
-import { v4 as uuidv4 } from 'uuid';
-import dayjs from 'dayjs';
 
 function App() {
 
@@ -14,35 +12,26 @@ function App() {
 
   const store = new SteinStore("https://stein.efishery.com/v1/storages/5e1edf521073e315924ceab4");
 
-  function appendData(komoditas, area_kota, area_provinsi, size, price) {
+  function appendData(payload, resetInput) {
     setLoadingAdd(true);
-    store.append("list", [
-      {
-        uuid: uuidv4(),
-        komoditas: komoditas,
-        area_provinsi: area_provinsi,
-        area_kota: area_kota,
-        size: size,
-        price: price,
-        tgl_parsed: dayjs(),
-      }
-    ])
-      .then(res => {
-        console.log(res);
-        setLoadingAdd(false);
-        setOpenModalAdd(false);
-        store.read("list").then(response => {
-          setData(response)
-        });
-      })
-      .catch(err => {
-        console.error(err);
-        setLoadingAdd(false);
-        setOpenModalAdd(false);
-        store.read("list").then(response => {
-          setData(response)
-        });
+    store.append("list", [payload])
+    .then(res => {
+      console.log(res);
+      setLoadingAdd(false);
+      setOpenModalAdd(false);
+      resetInput({});
+      store.read("list").then(response => {
+        setData(response)
       });
+    })
+    .catch(err => {
+      console.error(err);
+      setLoadingAdd(false);
+      setOpenModalAdd(false);
+      store.read("list").then(response => {
+        setData(response)
+      });
+    });
   }
 
   function searchData(searchValue, searchBy) {
